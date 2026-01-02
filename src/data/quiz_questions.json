@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "question": "How much time can you spend on plant care?",
+    "answers": [
+      { "id": 1, "text": "Almost none", "trait_ids": [1] }, 
+      { "id": 2, "text": "A few minutes a week", "trait_ids": [1] },
+      { "id": 3, "text": "I enjoy caring for plants", "trait_ids": [] },
+      { "id": 4, "text": "I want something decorative", "trait_ids": [2] }
+    ]
+  },
+  {
+    "id": 2,
+    "question": "What is your home environment like?",
+    "answers": [
+      { "id": 5, "text": "I have pets", "trait_ids": [3] },
+      { "id": 6, "text": "Lots of sunlight", "trait_ids": [2] },
+      { "id": 7, "text": "Not much natural light", "trait_ids": [] },
+      { "id": 8, "text": "I travel often", "trait_ids": [1] }
+    ]
+  },
+  {
+    "id": 3,
+    "question": "What matters most to you?",
+    "answers": [
+      { "id": 9, "text": "Easy to keep alive", "trait_ids": [1] },
+      { "id": 10, "text": "Looks impressive", "trait_ids": [2] },
+      { "id": 11, "text": "Safe for animals", "trait_ids": [3] },
+      { "id": 12, "text": "Fast growth", "trait_ids": [] }
+    ]
+  }
+]
