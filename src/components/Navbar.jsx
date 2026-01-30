@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"; //uses <Link> tags for navigation
 
 export default function Navbar({ darkMode, toggleDarkMode }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,7 +9,7 @@ export default function Navbar({ darkMode, toggleDarkMode }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
 
-          {/* Mobile Hamburger - Left */}
+          {/* Mobile Hamburger*/}
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="md:hidden text-[#65F0CD] focus:outline-none"

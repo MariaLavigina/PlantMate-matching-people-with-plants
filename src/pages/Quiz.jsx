@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import quizQuestions from "../data/quiz_questions.json";
 import Navbar from "../components/Navbar";
 
-export default function Quiz() {
+export default function Quiz({ darkMode, toggleDarkMode }) {
   const navigate = useNavigate();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState({});
@@ -23,23 +23,31 @@ export default function Quiz() {
   };
 
   return (
-   <div className="flex flex-col min-h-screen px-4 sm:px-6 lg:px-8 py-10 bg-gradient-to-b from-[#210E4A] to-[#5A1B27]">
-      <Navbar />
-      <div className="max-w-xl w-full mx-auto bg-white p-6 sm:p-8 rounded-lg shadow-md mt-20">
-        <h2 className="text-xl sm:text-2xl font-bold mb-4">
+   <div className={`flex flex-col min-h-screen px-4 sm:px-6 lg:px-8 py-10 transition-colors duration-500 ${darkMode ? 'bg-gradient-to-b from-[#210E4A] to-[#5A1B27]' : 'bg-gradient-to-b from-[#A75B2B] to-[#F4E5FB]'}`}>
+      <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+      <div className={`max-w-xl w-full mx-auto p-6 sm:p-8 rounded-lg shadow-2xl mt-20 backdrop-blur-md border-2 ${
+        darkMode
+          ? 'bg-white/10 border-[#65F0CD]/30'
+          : 'bg-white/30 border-[#210E4A]/30'
+      }`}>
+        <h2 className={`text-xl sm:text-2xl font-bold mb-4 ${darkMode ? 'text-white' : 'text-[#210E4A]'}`}>
           Question {currentQuestionIndex + 1} of {quizQuestions.length}
         </h2>
-        <p className="mb-6 text-base sm:text-lg">{currentQuestion.question}</p>
+        <p className={`mb-6 text-base sm:text-lg ${darkMode ? 'text-white' : 'text-[#210E4A]'}`}>{currentQuestion.question}</p>
 
         <div className="flex flex-col gap-3">
           {currentQuestion.answers.map((answer) => (
             <button
               key={answer.id}
               onClick={() => handleSelect(answer.id)}
-              className={`text-left p-3 sm:p-4 border rounded-lg hover:bg-green-50 
+              className={`text-left p-3 sm:p-4 border-2 rounded-lg transition-all duration-200 backdrop-blur-sm
                 ${selectedAnswers[currentQuestion.id] === answer.id
-                  ? "bg-green-100 border-green-500"
-                  : "bg-white"
+                  ? darkMode
+                    ? "bg-[#65F0CD]/30 border-[#65F0CD] text-white"
+                    : "bg-[#210E4A]/20 border-[#210E4A] text-[#210E4A]"
+                  : darkMode
+                    ? "bg-white/10 border-white/30 text-white hover:border-[#65F0CD] hover:bg-[#65F0CD]/10"
+                    : "bg-white/20 border-[#210E4A]/30 text-[#210E4A] hover:border-[#210E4A] hover:bg-white/40"
                 }`}
             >
               {answer.text}
@@ -50,10 +58,12 @@ export default function Quiz() {
         <button
           onClick={handleNext}
           disabled={!selectedAnswers[currentQuestion.id]}
-          className={`mt-6 w-full py-2 sm:py-3 px-4 sm:px-6 rounded-lg text-white font-semibold 
-            ${selectedAnswers[currentQuestion.id] 
-              ? "bg-green-500 hover:bg-green-600" 
-              : "bg-gray-300 cursor-not-allowed"
+          className={`mt-6 w-full py-2 sm:py-3 px-4 sm:px-6 rounded-lg font-semibold transition-all duration-200 border-2
+            ${selectedAnswers[currentQuestion.id]
+              ? darkMode
+                ? "bg-[#65F0CD] border-[#65F0CD] text-[#210E4A] hover:bg-[#4FD4B3] hover:border-[#4FD4B3]"
+                : "bg-[#210E4A] border-[#210E4A] text-[#65F0CD] hover:bg-[#2D1260]"
+              : "bg-gray-400/30 border-gray-400/50 cursor-not-allowed text-gray-600"
             }`}
         >
           {currentQuestionIndex < quizQuestions.length - 1 ? "Next Question" : "See My Plant Match"}

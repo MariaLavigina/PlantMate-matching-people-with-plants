@@ -16,5 +16,41 @@
     "name": "Fiddle Leaf Fig",
     "traits": [2],
     "description": "Decorative plant that needs attention and bright light."
+  },
+  {
+    "id": 4,
+    "name": "Calathea",
+    "traits": [4, 6, 5],
+    "description": "High-maintenance plant that needs humidity and careful watering."
+  },
+  {
+    "id": 5,
+    "name": "Pothos",
+    "traits": [1, 5, 7],
+    "description": "Fast-growing vine that adapts to many light conditions."
+  },
+  {
+    "id": 6,
+    "name": "Spider Plant",
+    "traits": [1, 3, 7],
+    "description": "Pet-safe plant that grows quickly and is easy to care for."
+  },
+  {
+    "id": 7,
+    "name": "Monstera Deliciosa",
+    "traits": [2, 7, 8],
+    "description": "Popular decorative plant with large leaves and fast growth."
+  },
+  {
+    "id": 8,
+    "name": "Peace Lily",
+    "traits": [5, 6, 8],
+    "description": "Elegant plant that prefers low light and high humidity."
+  },
+  {
+    "id": 9,
+    "name": "ZZ Plant",
+    "traits": [1, 5],
+    "description": "Extremely low-maintenance plant that thrives in low light."
   }
 ]
