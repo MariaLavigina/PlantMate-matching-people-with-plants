@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import plants from "../data/plants.json";
 import traits from "../data/traits.json";
 import quizQuestions from "../data/quiz_questions.json";
+import Navbar from "../components/Navbar";
 
 export default function Results() {
   const { state } = useLocation();
@@ -23,8 +24,12 @@ export default function Results() {
   }, null);
 
   return (
-    <div className="flex flex-col items-center min-h-screen px-4 sm:px-6 lg:px-8 py-10">
-      <div className="max-w-xl w-full bg-white p-6 sm:p-8 rounded-lg shadow-md text-center">
+
+
+  <div className="flex flex-col items-center min-h-screen px-4 sm:px-6 lg:px-8 py-10 bg-gradient-to-b from-[#210E4A] to-[#5A1B27]">
+    <Navbar />
+
+      <div className="max-w-xl w-full bg-white p-6 sm:p-8 rounded-lg shadow-md text-center mt-20">
         <h2 className="text-2xl sm:text-3xl font-bold mb-4">Your Plant Match </h2>
         {bestMatch ? (
           <div className="border p-4 sm:p-6 rounded-lg shadow-sm">

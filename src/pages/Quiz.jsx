@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import quizQuestions from "../data/quiz_questions.json";
+import Navbar from "../components/Navbar";
 
 export default function Quiz() {
   const navigate = useNavigate();
@@ -22,8 +23,9 @@ export default function Quiz() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen px-4 sm:px-6 lg:px-8 py-10">
-      <div className="max-w-xl w-full mx-auto bg-white p-6 sm:p-8 rounded-lg shadow-md">
+   <div className="flex flex-col min-h-screen px-4 sm:px-6 lg:px-8 py-10 bg-gradient-to-b from-[#210E4A] to-[#5A1B27]">
+      <Navbar />
+      <div className="max-w-xl w-full mx-auto bg-white p-6 sm:p-8 rounded-lg shadow-md mt-20">
         <h2 className="text-xl sm:text-2xl font-bold mb-4">
           Question {currentQuestionIndex + 1} of {quizQuestions.length}
         </h2>
