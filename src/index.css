@@ -1,1 +1,25 @@
 @import "tailwindcss";
+
+/* Visible plant color animation on hover */
+@keyframes plantColorShift {
+  0%, 100% {
+    filter: hue-rotate(0deg) saturate(1) brightness(1);
+  }
+  25% {
+    filter: hue-rotate(30deg) saturate(1.4) brightness(1.1);
+  }
+  50% {
+    filter: hue-rotate(50deg) saturate(1.6) brightness(1.15);
+  }
+  75% {
+    filter: hue-rotate(30deg) saturate(1.4) brightness(1.1);
+  }
+}
+
+.plant-hover-animation {
+  transition: filter 0.3s ease;
+}
+
+.plant-hover-animation:hover {
+  animation: plantColorShift 2.5s ease-in-out infinite;
+}
