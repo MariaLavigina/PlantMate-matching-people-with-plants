@@ -4,6 +4,9 @@ import traits from "../data/traits.json";
 import quizQuestions from "../data/quiz_questions.json";
 import Navbar from "../components/Navbar";
 
+const getPlantImagePath = (plantName) =>
+  `/images/plants/${plantName.toLowerCase().replace(/\s+/g, "-")}.png`;
+
 export default function Results({ darkMode, toggleDarkMode }) {
   const { state } = useLocation();
   const navigate = useNavigate();
@@ -24,43 +27,78 @@ export default function Results({ darkMode, toggleDarkMode }) {
   }, null);
 
   return (
-
-
-  <div className={`flex flex-col items-center min-h-screen px-4 sm:px-6 lg:px-8 py-10 transition-colors duration-500 ${darkMode ? 'bg-gradient-to-b from-[#210E4A] to-[#5A1B27]' : 'bg-gradient-to-b from-[#A75B2B] to-[#F4E5FB]'}`}>
-    <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-
-      <div className={`max-w-xl w-full p-6 sm:p-8 rounded-lg shadow-2xl text-center mt-20 backdrop-blur-md border-2 ${
+    <div
+      className={`relative min-h-screen transition-colors duration-500 ${
         darkMode
-          ? 'bg-white/10 border-[#65F0CD]/30'
-          : 'bg-white/30 border-[#210E4A]/30'
-      }`}>
-        <h2 className={`text-2xl sm:text-3xl font-bold mb-4 ${darkMode ? 'text-white' : 'text-[#210E4A]'}`}>Your Plant Match</h2>
-        {bestMatch ? (
-          <div className={`p-4 sm:p-6 rounded-lg border-2 backdrop-blur-sm ${
-            darkMode
-              ? 'bg-white/10 border-[#65F0CD]/50'
-              : 'bg-white/20 border-[#210E4A]/50'
-          }`}>
-            <h3 className={`font-semibold text-xl sm:text-2xl mb-2 ${darkMode ? 'text-[#65F0CD]' : 'text-[#210E4A]'}`}>{bestMatch.name}</h3>
-            <p className={`mb-2 ${darkMode ? 'text-white' : 'text-[#210E4A]'}`}>{bestMatch.description}</p>
-            <p className={`mt-2 text-sm sm:text-base ${darkMode ? 'text-white/80' : 'text-[#210E4A]/80'}`}>
-              Traits: {bestMatch.traits.map((id) => traits.find((t) => t.id === id)?.name).join(", ")}
-            </p>
+          ? "bg-gradient-to-b from-[#210E4A] to-[#5A1B27]"
+          : "bg-gradient-to-b from-[#A75B2B] to-[#F4E5FB]"
+      }`}
+    >
+      {/* Navbar */}
+      <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+
+      {/* Main Content */}
+      <div className="flex flex-col md:flex-row justify-between relative min-h-screen px-4 sm:px-6 lg:px-12 pt-[80px] md:pt-20">
+
+        {/* Left Side - Text */}
+     <div className="md:w-1/2 z-20 flex flex-col space-y-4
+                items-center text-center
+                md:justify-center md:items-start md:text-left">
+
+
+          <h2
+            className={`text-3xl sm:text-4xl lg:text-5xl font-bold ${
+              darkMode ? "text-white" : "text-[#210E4A]"
+            }`}
+          >
+            Your Plant Match
+          </h2>
+
+          {bestMatch ? (
+            <>
+              <h3
+                className={`text-2xl sm:text-3xl lg:text-4xl font-semibold ${
+                  darkMode ? "text-[#65F0CD]" : "text-[#210E4A]"
+                }`}
+              >
+                {bestMatch.name}
+              </h3>
+              <p className={`${darkMode ? "text-white" : "text-[#210E4A]"}`}>
+                {bestMatch.description}
+              </p>
+              <p className={`${darkMode ? "text-white/80" : "text-[#210E4A]/80"}`}>
+                Traits: {bestMatch.traits.map((id) => traits.find((t) => t.id === id)?.name).join(", ")}
+              </p>
+              <button
+                onClick={() => navigate("/")}
+                className={`mt-4 py-2 px-6 rounded-full font-semibold border-2 transition-all duration-300 self-center md:self-start
+ ${
+                  darkMode
+                    ? "bg-[#65F0CD] border-[#65F0CD] text-[#210E4A] hover:bg-[#4FD4B3] hover:border-[#4FD4B3]"
+                    : "bg-[#210E4A] border-[#210E4A] text-[#65F0CD] hover:bg-[#2D1260]"
+                }`}
+              >
+                Go Home
+              </button>
+            </>
+          ) : (
+            <p className={darkMode ? "text-white" : "text-[#210E4A]"}>No plant match found.</p>
+          )}
+        </div>
+
+        {/* Right Side - Plant Image Anchored Bottom */}
+        {bestMatch && (
+          <div className="md:w-1/2 w-full relative flex-1">
+            {/* Desktop: unchanged */}
+            <img
+              src={getPlantImagePath(bestMatch.name)}
+              alt={bestMatch.name}
+              onError={(e) => (e.target.src = "/images/plants/placeholder.png")}
+              className="absolute bottom-0 w-full h-[50vh] md:h-[90vh] object-contain drop-shadow-2xl
+                         sm:h-[50vh] xs:h-[45vh] xs:bottom-0"
+            />
           </div>
-        ) : (
-          //error/fallback message that shows if the quiz cannot find any matching plant for the user's answers
-          <p className={darkMode ? 'text-white' : 'text-[#210E4A]'}>No plant match found.</p>
         )}
-        <button
-          onClick={() => navigate("/")}
-          className={`mt-6 w-full sm:w-auto py-2 sm:py-3 px-4 sm:px-6 rounded-lg font-semibold transition-all duration-200 border-2 ${
-            darkMode
-              ? 'bg-[#65F0CD] border-[#65F0CD] text-[#210E4A] hover:bg-[#4FD4B3] hover:border-[#4FD4B3]'
-              : 'bg-[#210E4A] border-[#210E4A] text-[#65F0CD] hover:bg-[#2D1260]'
-          }`}
-        >
-          Go Home
-        </button>
       </div>
     </div>
   );

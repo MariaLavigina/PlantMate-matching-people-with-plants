@@ -1,14 +1,12 @@
 # run this app
 
-npm install
+npm run dev -- --host
 
-npm run dev
+http://localhost:5173/
 
-
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 
 # React + Vite
-
-
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
