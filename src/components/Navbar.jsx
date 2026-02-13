@@ -33,6 +33,9 @@ export default function Navbar({ darkMode, toggleDarkMode }) {
 
           {/* Desktop Navigation - All aligned left */}
           <div className="hidden md:flex items-center space-x-8">
+            <Link to="/" className="text-[#E2CFFA] hover:text-[#65F0CD] transition-colors duration-300 font-medium">
+              Home
+            </Link>
             <Link to="/about" className="text-[#E2CFFA] hover:text-[#65F0CD] transition-colors duration-300 font-medium">
               About Me
             </Link>
@@ -85,6 +88,13 @@ export default function Navbar({ darkMode, toggleDarkMode }) {
         {isOpen && (
           <div className="md:hidden pb-4">
             <div className="flex flex-col space-y-4">
+              <Link
+                to="/"
+                onClick={() => setIsOpen(false)}
+                className="text-[#E2CFFA] hover:text-[#65F0CD] transition-colors duration-300 font-medium"
+              >
+                Home
+              </Link>
               <Link
                 to="/about"
                 onClick={() => setIsOpen(false)}

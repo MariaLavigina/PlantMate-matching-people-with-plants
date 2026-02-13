@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
 import Quiz from "./pages/Quiz";
 import Results from "./pages/Result";
+import DevPanel from "./components/DevPanel";
 
 export default function App() {
   // Initialize dark mode from localStorage or default to false
@@ -31,8 +34,11 @@ export default function App() {
 
   return (
     <Router>
+      <DevPanel />
       <Routes>
         <Route path="/" element={<Home darkMode={darkMode} toggleDarkMode={toggleDarkMode} />} />
+        <Route path="/about" element={<About darkMode={darkMode} toggleDarkMode={toggleDarkMode} />} />
+        <Route path="/contact" element={<Contact darkMode={darkMode} toggleDarkMode={toggleDarkMode} />} />
         <Route path="/quiz" element={<Quiz darkMode={darkMode} toggleDarkMode={toggleDarkMode} />} />
         <Route path="/results" element={<Results darkMode={darkMode} toggleDarkMode={toggleDarkMode} />} />
       </Routes>

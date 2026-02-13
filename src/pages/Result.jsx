@@ -10,6 +10,9 @@ export default function Results({ darkMode, toggleDarkMode }) {
   const navigate = useNavigate();
   const selectedAnswers = state?.selectedAnswers || {};
 
+  // Check if this is from DevPanel
+  const devPlantId = state?.devPlantId;
+
   const selectedTraitIds = Object.entries(selectedAnswers).flatMap(
     ([qId, aId]) => {
       const question = quizQuestions.find((q) => q.id === Number(qId));
@@ -18,11 +21,14 @@ export default function Results({ darkMode, toggleDarkMode }) {
     }
   );
 
-  const bestMatch = plants.reduce((best, plant) => {
-    const overlap = plant.traits.filter((t) => selectedTraitIds.includes(t)).length;
-    if (!best || overlap > best.overlap) return { ...plant, overlap };
-    return best;
-  }, null);
+  // If devPlantId exists, use that plant directly (for dev preview)
+  const bestMatch = devPlantId
+    ? plants.find((plant) => plant.id === devPlantId)
+    : plants.reduce((best, plant) => {
+        const overlap = plant.traits.filter((t) => selectedTraitIds.includes(t)).length;
+        if (!best || overlap > best.overlap) return { ...plant, overlap };
+        return best;
+      }, null);
 
   return (
     <div
@@ -36,17 +42,18 @@ export default function Results({ darkMode, toggleDarkMode }) {
       <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
 
       {/* Main Content */}
-      <div className="flex flex-col md:flex-row justify-between relative px-4 sm:px-6 lg:px-12 pt-20 md:h-[calc(100vh-80px)]">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-center md:gap-4 lg:gap-6 xl:gap-8 2xl:gap-12 relative px-4 sm:px-6 md:px-6 lg:px-10 xl:px-14 2xl:px-16 pt-20 md:pt-20 lg:pt-24 pb-8 md:pb-0 md:h-[calc(100vh-80px)]">
 
         {/* Left Side - Text */}
-        <div className="md:w-1/2 z-10 flex flex-col space-y-4
+        <div className="w-full md:w-[44%] lg:w-[40%] xl:w-[36%] z-10 flex flex-col space-y-2 sm:space-y-3 md:space-y-3 lg:space-y-4
                 items-center text-center
-                md:justify-center md:items-start md:text-left mb-6 md:mb-0">
+                md:items-start md:text-left mb-8 md:mb-0 px-2 md:px-0">
 
           <h2
-            className={`text-3xl sm:text-4xl lg:text-5xl font-bold ${
+            className={`text-2xl sm:text-3xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-bold leading-tight ${
               darkMode ? "text-white" : "text-[#210E4A]"
             }`}
+            style={{ fontFamily: "'Caveat', cursive", fontOpticalSizing: "auto" }}
           >
             Your Plant Match
           </h2>
@@ -54,21 +61,28 @@ export default function Results({ darkMode, toggleDarkMode }) {
           {bestMatch ? (
             <>
               <h3
-                className={`text-2xl sm:text-3xl lg:text-4xl font-semibold ${
+                className={`text-xl sm:text-2xl md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-semibold leading-tight ${
                   darkMode ? "text-[#65F0CD]" : "text-[#210E4A]"
                 }`}
+                style={{ fontFamily: "'Caveat', cursive", fontOpticalSizing: "auto" }}
               >
                 {bestMatch.name}
               </h3>
-              <p className={`${darkMode ? "text-white" : "text-[#210E4A]"}`}>
+              <p
+                className={`text-sm sm:text-base md:text-xs lg:text-sm xl:text-base 2xl:text-lg leading-relaxed ${darkMode ? "text-white" : "text-[#210E4A]"}`}
+                style={{ fontFamily: "'Comic Relief', system-ui" }}
+              >
                 {bestMatch.description}
               </p>
-              <p className={`${darkMode ? "text-white/80" : "text-[#210E4A]/80"}`}>
+              <p
+                className={`text-xs sm:text-sm md:text-xs lg:text-xs xl:text-sm 2xl:text-base leading-relaxed ${darkMode ? "text-white/80" : "text-[#210E4A]/80"}`}
+                style={{ fontFamily: "'Comic Relief', system-ui" }}
+              >
                 Traits: {bestMatch.traits.map((id) => traits.find((t) => t.id === id)?.name).join(", ")}
               </p>
               <button
                 onClick={() => navigate("/")}
-                className={`mt-4 py-2 px-6 rounded-full font-semibold border-2 transition-all duration-300 self-center md:self-start
+                className={`mt-2 sm:mt-3 md:mt-3 lg:mt-4 py-1.5 px-4 sm:py-2 sm:px-6 md:py-2 md:px-5 lg:py-2 lg:px-6 text-xs sm:text-sm md:text-xs lg:text-sm xl:text-base rounded-full font-semibold border-2 transition-all duration-300 self-center md:self-start
  ${
                   darkMode
                     ? "bg-[#65F0CD] border-[#65F0CD] text-[#210E4A] hover:bg-[#4FD4B3] hover:border-[#4FD4B3]"
@@ -79,17 +93,17 @@ export default function Results({ darkMode, toggleDarkMode }) {
               </button>
             </>
           ) : (
-            <p className={darkMode ? "text-white" : "text-[#210E4A]"}>No plant match found.</p>
+            <p className={darkMode ? "text-white" : "text-[#210E4A]"} style={{ fontFamily: "'Comic Relief', system-ui" }}>No plant match found.</p>
           )}
         </div>
 
         {/* Right Side - Interactive Plant Image */}
         {bestMatch && (
-          <div className="md:w-1/2 w-full relative flex-1 min-h-[50vh] md:min-h-0">
+          <div className="w-full md:w-[44%] lg:w-[40%] xl:w-[36%] flex items-end justify-center">
             <InteractivePlantImage
               plant={bestMatch}
               darkMode={darkMode}
-              className="absolute bottom-0 left-0 right-0 w-full max-h-[50vh] md:max-h-[85vh]"
+              className="w-full max-h-[45vh] sm:max-h-[50vh] md:max-h-[55vh] lg:max-h-[60vh] xl:max-h-[65vh] 2xl:max-h-[70vh]"
             />
           </div>
         )}

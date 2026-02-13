@@ -17,16 +17,16 @@
           {/* Left side - Text content */}
           <div className="relative z-20 h-full flex flex-col justify-center pl-8 md:pl-12 lg:pl-16 xl:pl-20 2xl:pl-28 pr-6 md:pr-8 lg:pr-12">
             <div className="max-w-xl lg:max-w-2xl xl:max-w-3xl">
-              <h1 className={`font-heading text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl mb-5 md:mb-6 lg:mb-8 leading-tight drop-shadow-2xl ${darkMode ? 'text-white' : 'text-[#210E4A]'}`}>
+              <h1 className={`font-heading text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl mb-5 md:mb-6 lg:mb-8 leading-tight drop-shadow-2xl ${darkMode ? 'text-white' : 'text-[#210E4A]'}`} style={{ fontFamily: "'Caveat', cursive", fontOpticalSizing: "auto" }}>
                 PlantMate+
               </h1>
 
-              <p className={`font-sans text-base md:text-lg lg:text-xl xl:text-2xl mb-8 md:mb-10 lg:mb-12 leading-relaxed max-w-lg lg:max-w-xl xl:max-w-2xl drop-shadow-lg ${darkMode ? 'text-white' : 'text-[#3D1952]'}`}>
+              <p className={`font-sans text-base md:text-lg lg:text-xl xl:text-2xl mb-8 md:mb-10 lg:mb-12 leading-relaxed max-w-lg lg:max-w-xl xl:max-w-2xl drop-shadow-lg ${darkMode ? 'text-white' : 'text-[#3D1952]'}`} style={{ fontFamily: "'Comic Relief', system-ui" }}>
                 PlantMate matches you with plants that fit your lifestyle, personality, and home. No guilt. No guesswork. Just
                 plants you'll actually keep alive.
               </p>
 
-              <p className={`font-sans text-base md:text-lg lg:text-xl mb-10 md:mb-12 lg:mb-14 leading-relaxed max-w-lg lg:max-w-xl xl:max-w-2xl drop-shadow-lg ${darkMode ? 'text-white' : 'text-[#3D1952]'}`}>
+              <p className={`font-sans text-base md:text-lg lg:text-xl mb-10 md:mb-12 lg:mb-14 leading-relaxed max-w-lg lg:max-w-xl xl:max-w-2xl drop-shadow-lg ${darkMode ? 'text-white' : 'text-[#3D1952]'}`} style={{ fontFamily: "'Comic Relief', system-ui" }}>
                 Take our quick quiz and meet your perfect plant match.
               </p>
 
@@ -38,6 +38,7 @@
                     ? 'bg-[#20083D]/40 border-[#65F0CD] text-[#65F0CD] hover:bg-[#65F0CD]/80 hover:text-[#20083D]'
                     : 'bg-white/30 border-[#20083D] text-[#20083D] hover:bg-[#20083D]/80 hover:text-white'
                 }`}
+                style={{ fontFamily: "'Comic Relief', system-ui" }}
               >
                 Find Your Plant Match
               </button>
@@ -49,18 +50,18 @@
             <img
               src={darkMode ? "/images/desktop-images/plants-desktop-light.svg" : "/images/desktop-images/plants-desktop-dark.svg"}
               alt="Plants"
-              className="h-[85vh] md:h-[90vh] lg:h-[95vh] w-auto object-contain object-bottom transition-transform duration-500 plant-hover-animation"
+              className="h-[105vh] w-auto object-contain object-bottom transition-transform duration-500 plant-hover-animation z-50"
             />
           </div>
         </div>                                                                                                                    
                                                                                                                                   
         {/* Mobile view - unchanged */}
         <div className="md:hidden relative z-10 flex flex-col items-center text-center max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-20">
-          <h1 className="font-heading text-5xl sm:text-6xl lg:text-7xl mb-6 mt-10 text-white">
+          <h1 className="font-heading text-5xl sm:text-6xl lg:text-7xl mb-6 mt-10 text-white" style={{ fontFamily: "'Caveat', cursive", fontOpticalSizing: "auto" }}>
             PlantMate+
           </h1>
 
-          <p className="font-sans text-lg sm:text-xl lg:text-2xl mb-8 text-white">
+          <p className="font-sans text-lg sm:text-xl lg:text-2xl mb-8 text-white" style={{ fontFamily: "'Comic Relief', system-ui" }}>
             PlantMate matches you with plants that fit your lifestyle, personality, and home. No guilt. No guesswork. Just plants
             you'll actually keep alive.
             Take our quick quiz and meet your perfect plant match.
@@ -82,6 +83,7 @@
                 ? 'bg-[#20083D]/40 border-[#65F0CD] text-[#65F0CD] hover:bg-[#65F0CD]/80 hover:text-[#20083D]'
                 : 'bg-white/30 border-[#20083D] text-[#20083D] hover:bg-[#20083D]/80 hover:text-white'
             }`}
+            style={{ fontFamily: "'Comic Relief', system-ui" }}
           >
             Find Your Plant Match
           </button>
