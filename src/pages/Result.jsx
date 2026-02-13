@@ -3,9 +3,7 @@ import plants from "../data/plants.json";
 import traits from "../data/traits.json";
 import quizQuestions from "../data/quiz_questions.json";
 import Navbar from "../components/Navbar";
-
-const getPlantImagePath = (plantName) =>
-  `/images/plants/${plantName.toLowerCase().replace(/\s+/g, "-")}.png`;
+import InteractivePlantImage from "../components/InteractivePlantImage";
 
 export default function Results({ darkMode, toggleDarkMode }) {
   const { state } = useLocation();
@@ -28,7 +26,7 @@ export default function Results({ darkMode, toggleDarkMode }) {
 
   return (
     <div
-      className={`relative min-h-screen transition-colors duration-500 ${
+      className={`relative h-screen overflow-hidden transition-colors duration-500 ${
         darkMode
           ? "bg-gradient-to-b from-[#210E4A] to-[#5A1B27]"
           : "bg-gradient-to-b from-[#A75B2B] to-[#F4E5FB]"
@@ -38,13 +36,12 @@ export default function Results({ darkMode, toggleDarkMode }) {
       <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
 
       {/* Main Content */}
-      <div className="flex flex-col md:flex-row justify-between relative min-h-screen px-4 sm:px-6 lg:px-12 pt-[80px] md:pt-20">
+      <div className="flex flex-col md:flex-row justify-between relative px-4 sm:px-6 lg:px-12 pt-20 md:h-[calc(100vh-80px)]">
 
         {/* Left Side - Text */}
-     <div className="md:w-1/2 z-20 flex flex-col space-y-4
+        <div className="md:w-1/2 z-10 flex flex-col space-y-4
                 items-center text-center
-                md:justify-center md:items-start md:text-left">
-
+                md:justify-center md:items-start md:text-left mb-6 md:mb-0">
 
           <h2
             className={`text-3xl sm:text-4xl lg:text-5xl font-bold ${
@@ -86,16 +83,13 @@ export default function Results({ darkMode, toggleDarkMode }) {
           )}
         </div>
 
-        {/* Right Side - Plant Image Anchored Bottom */}
+        {/* Right Side - Interactive Plant Image */}
         {bestMatch && (
-          <div className="md:w-1/2 w-full relative flex-1">
-            {/* Desktop: unchanged */}
-            <img
-              src={getPlantImagePath(bestMatch.name)}
-              alt={bestMatch.name}
-              onError={(e) => (e.target.src = "/images/plants/placeholder.png")}
-              className="absolute bottom-0 w-full h-[50vh] md:h-[90vh] object-contain drop-shadow-2xl
-                         sm:h-[50vh] xs:h-[45vh] xs:bottom-0"
+          <div className="md:w-1/2 w-full relative flex-1 min-h-[50vh] md:min-h-0">
+            <InteractivePlantImage
+              plant={bestMatch}
+              darkMode={darkMode}
+              className="absolute bottom-0 left-0 right-0 w-full max-h-[50vh] md:max-h-[85vh]"
             />
           </div>
         )}
