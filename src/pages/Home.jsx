@@ -46,13 +46,14 @@
           </div>
 
           {/* Right side - Plants */}
-          <div className="relative h-full flex items-end justify-end overflow-hidden">
-            <img
-              src={darkMode ? "/images/desktop-images/plants-desktop-light.svg" : "/images/desktop-images/plants-desktop-dark.svg"}
-              alt="Plants"
-              className="h-[105vh] w-auto object-contain object-bottom transition-transform duration-500 plant-hover-animation z-50"
-            />
-          </div>
+
+<div className="relative h-full flex items-center justify-end overflow-hidden">
+  <img
+    src={darkMode ? "/images/desktop-images/plants-desktop-light.svg" : "/images/desktop-images/plants-desktop-dark.svg"}
+    alt="Plants"
+    className="h-full max-h-[80%] w-auto object-contain transition-transform duration-500 plant-hover-animation z-50"
+  />
+</div>
         </div>                                                                                                                    
                                                                                                                                   
         {/* Mobile view - unchanged */}

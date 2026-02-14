@@ -6,6 +6,16 @@ http://localhost:5173/
 
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 
+# Start your backend server
+
+node server.js
+
+# insomnia
+
+http://localhost:5000/login
+/register → creates a new user
+/login → logs in an existing user
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
